@@ -998,10 +998,9 @@ $.extend( $.Viewer.prototype, $.EventSource.prototype, $.ControlDock.prototype, 
         // Go through top element (passed to us) and remove all children
         // Use removeChild to make sure it handles SVG or any non-html
         // also it performs better - http://jsperf.com/innerhtml-vs-removechild/15
-        if (this.element){
-            while (this.element.firstChild) {
-                this.element.removeChild(this.element.firstChild);
-            }
+        // Remove only the container element added by OpenSeadragon
+        if (this.container && this.container.parentNode === this.element) {
+            this.element.removeChild(this.container);
         }
 
         this.container.onsubmit = null;
